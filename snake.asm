@@ -24,7 +24,11 @@ sw $s6 , 200($t0)
 sw $s6 , 204($t0)
 sw $s6 , 208($t0)
 
-sw $s7 , 80($t0)
+sw $s7 , 128($t0)
+sw $s7 , 380($t0)
+sw $s7 , 84($t0)
+sw $s7 , 1004($t0)
+
 
 #carga posición inicial de snake en el arreglo de posición
 addi $t3, $zero, 200
@@ -58,6 +62,9 @@ j teclado
 
 
 mover_derecha:
+addi $a0, $zero, 124
+addi $a1, $zero, 64
+addi $a2, $zero, 1084
 jal evaluar_siguiente
 beq $v0, 1, teclado
 
@@ -71,6 +78,9 @@ jal desplazar_cuerpo
 j teclado
 
 mover_izquierda:
+addi $a0, $zero, 64
+addi $a1, $zero, 64
+addi $a2, $zero, 1024
 jal evaluar_siguiente
 beq $v0, 1, teclado
 
@@ -84,6 +94,9 @@ jal desplazar_cuerpo
 j teclado
 
 mover_arriba:
+addi $a0, $zero, 64
+addi $a1, $zero, 4
+addi $a2, $zero, 128
 jal evaluar_siguiente
 beq $v0, 1, teclado
 
@@ -97,6 +110,9 @@ jal desplazar_cuerpo
 j teclado
 
 mover_abajo:
+addi $a0, $zero, 960
+addi $a1, $zero, 4
+addi $a2, $zero, 1024
 jal evaluar_siguiente
 beq $v0, 1, teclado
 
@@ -168,7 +184,9 @@ sll $t4, $t4, 2		#contador por 4
 add $t4, $s1, $t4	#se ubica en la posición
 lw $t5, 0($t4)		#cargamos lo contenido en $t4, para despues evaluarlo en el tablero
 #sll $t5, $t5, 2	#mutiplica por 4
-add $t5, $s0, $t5	#se suma a la base del tablero
+#add $t5, $s0, $t5	#se suma a la base del tablero
+
+
 
 beq $s3, 100, evaluar_a_la_derecha #d
 beq $s3, 97, evaluar_a_la_izquierda #a
@@ -176,7 +194,23 @@ beq $s3, 119, evaluar_arriba #w
 beq $s3, 115, evaluar_abajo #s
 
 evaluar_a_la_derecha:
+while_derecha:
+beq $a0, $t5, con_borde_a_la_derecha
+add $a0, $a0, $a1	#recorro el tablero
+beq $a2, $a0, sin_borde_a_la_derecha
+j while_derecha
+#beq $t5, 124, con_borde_a_la_derecha
+
+sin_borde_a_la_derecha:
+add $t5, $s0, $t5	#se suma a la base del tablero
 addi $s5, $t5, 4	#accedo al elemento a la derecha de la cabeza de snake
+j seguir_evaluando_derecha
+
+con_borde_a_la_derecha:
+add $t5, $s0, $t5	#se suma a la base del tablero
+addi $s5, $t5, -60	#accedo al elemento a la derecha de la cabeza de snake
+
+seguir_evaluando_derecha:
 lw $t5, 0($s5)		#cargo lo que haya en ese espacio
 beq $t5, 16767247, salir#si es obstaculo, salir
 beq $t5, $s6, salir	#si es cuerpo, salir
@@ -186,7 +220,25 @@ j fin_evaluar_siguiente	#si no haby obstaculo, terminar para desplazar
 
 
 evaluar_a_la_izquierda:
-addi $s5, $t5, -4	
+while_izquierda:
+beq $a0, $t5, con_borde_a_la_izquierda
+add $a0, $a0, $a1	#recorro el tablero
+beq $a2, $a0, sin_borde_a_la_izquierda
+j while_izquierda
+
+#beq $t5, 64, con_borde_a_la_izquierda
+
+sin_borde_a_la_izquierda:
+add $t5, $s0, $t5	#se suma a la base del tablero
+addi $s5, $t5, -4	#accedo al elemento a la derecha de la cabeza de snake
+j seguir_evaluando_izquierda
+
+con_borde_a_la_izquierda:
+add $t5, $s0, $t5	#se suma a la base del tablero
+addi $s5, $t5, 60	#accedo al elemento a la derecha de la cabeza de snake
+
+seguir_evaluando_izquierda:
+	
 lw $t5, 0($s5)
 beq $t5, 16767247, salir
 beq $t5, $s6, salir
@@ -195,7 +247,26 @@ beq $t5, $s7, comer
 j fin_evaluar_siguiente
 
 evaluar_arriba:
-addi $s5, $t5, -64	
+while_arriba:
+beq $a0, $t5, con_borde_arriba
+add $a0, $a0, $a1	#recorro el tablero
+beq $a2, $a0, sin_borde_arriba
+j while_arriba
+
+#beq $t5, 64, con_borde_arriba
+
+sin_borde_arriba:
+add $t5, $s0, $t5	#se suma a la base del tablero
+addi $s5, $t5, -64	#accedo al elemento a la derecha de la cabeza de snake
+j seguir_evaluando_arriba
+
+con_borde_arriba:
+add $t5, $s0, $t5	#se suma a la base del tablero
+addi $s5, $t5, 896	#accedo al elemento a la derecha de la cabeza de snake
+
+seguir_evaluando_arriba:
+	
+	
 lw $t5, 0($s5)
 beq $t5, 16767247, salir
 beq $t5, $s6, salir
@@ -204,7 +275,24 @@ beq $t5, $s7, comer
 j fin_evaluar_siguiente
 
 evaluar_abajo:
-addi $s5, $t5, 64	
+while_abajo:
+beq $a0, $t5, con_borde_abajo
+add $a0, $a0, $a1	#recorro el tablero
+beq $a2, $a0, sin_borde_abajo
+j while_abajo
+#beq $t5, 64, con_borde_abajo
+
+sin_borde_abajo:
+add $t5, $s0, $t5	#se suma a la base del tablero
+addi $s5, $t5, 64	#accedo al elemento a la derecha de la cabeza de snake
+j seguir_evaluando_abajo
+
+con_borde_abajo:
+add $t5, $s0, $t5	#se suma a la base del tablero
+addi $s5, $t5, -896	#accedo al elemento a la derecha de la cabeza de snake
+
+seguir_evaluando_abajo:
+	
 lw $t5, 0($s5)
 beq $t5, 16767247, salir
 beq $t5, $s6, salir
@@ -221,7 +309,23 @@ sub $s5, $s5, $s0	#conseguimos la diferencia para guardarla en el arreglo snake
 sw $s5, 4($t4)
 
 
+
 fin_evaluar_siguiente:
 jr $ra
+
+
+
+#a0: lo que hay en la ultima posición de snake
+#a1: la pared minima
+#2: lo que se suma para hacer las compraciones
+#a3: lo que se sumaria si fuera borde
+#t4: si se llega a ser este valor al estar moviendo hacia arriba, es borde
+#es_borde:
+#while:
+#beq $a0, $a1, si_es_borde
+#add $a1, $a1, $a2	#recorro el tablero
+#beq $a1, $t4, no_es_borde
+#j while
+#jr $ra
 
 salir:
