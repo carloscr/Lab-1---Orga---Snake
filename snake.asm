@@ -2,7 +2,16 @@
 
 display: .word 0:262144
 snake: .word -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
-contador: 3
+numero_cero: 3329330,3329330,3329330, 3329330,0,3329330, 3329330,0,3329330, 3329330,0,3329330, 3329330,3329330,3329330
+numero_uno: 0,3329330,3329330, 3329330,3329330,3329330, 0,3329330,3329330, 0,3329330,3329330, 0,3329330,3329330
+numero_dos: 3329330,3329330,3329330, 0,0,3329330, 3329330,3329330,3329330, 3329330,0,0, 3329330,3329330,3329330
+numero_tres: 3329330,3329330,3329330, 0,0,3329330, 0,3329330,3329330, 0,0,3329330, 3329330,3329330,3329330
+numero_cuatro: 3329330,0,3329330, 3329330,0,3329330, 3329330,3329330,3329330, 0,0,3329330, 0,0,3329330
+numero_cinco: 3329330,3329330,3329330, 3329330,0,0, 3329330,3329330,3329330, 0,0,3329330, 3329330,3329330,3329330
+numero_seis: 3329330,3329330,3329330, 3329330,0,0, 3329330,3329330,3329330, 3329330,0,3329330, 3329330,3329330,3329330
+numero_siete: 3329330,3329330,3329330, 0,0,3329330, 0,0,3329330, 0,0,3329330, 0,0,3329330
+numero_ocho: 3329330,3329330,3329330, 3329330,0,3329330, 3329330,3329330,3329330, 3329330,0,3329330, 3329330,3329330,3329330
+numero_nueve: 3329330,3329330,3329330, 3329330,0,3329330, 3329330,3329330,3329330, 0,0,3329330, 3329330,3329330,3329330
 
 .text
 la $t0, display
@@ -12,6 +21,7 @@ la $s1, snake
 
 #contador
 addi $s4, $zero, 0
+
 
 #colores
 addi $t2, $zero, 0xffd90f	#color obstaculos
@@ -23,6 +33,14 @@ addi $s7, $zero, 0xffffff	#color comida
 sw $s6 , 1032($t0)
 sw $s6 , 1036($t0)
 sw $s6 , 1040($t0)
+
+sw $t2 , 1080($t0)
+sw $t2 , 2012($t0)
+sw $t2 , 3016($t0)
+sw $t2 , 1200($t0)
+sw $t2 , 1064($t0)
+sw $t2 , 2080($t0)
+sw $t2 , 3000($t0)
 
 #muestra el primer alimento
 li $a1, 862
@@ -43,10 +61,120 @@ sw $t3, 4($t1)
 addi $t3, $zero, 1040
 sw $t3, 8($t1)
 
+imprimir_contador:
+addi $a0, $s0, 48	#a0 contiene la dirección de la "matriz" del primer numero
+addi $a1, $zero, 10 	#para dividir por 10
+div $s4, $a1
+mflo $a1
+beq $a1, 0, print_cero
+beq $a1, 1, print_uno
+beq $a1, 2, print_dos
+beq $a1, 3, print_tres
+beq $a1, 4, print_cuatro
+beq $a1, 5, print_cinco
+beq $a1, 6, print_seis
+beq $a1, 7, print_siete
+beq $a1, 8, print_ocho
+beq $a1, 9, print_nueve
+
+print_cero:
+la $a2, numero_cero
+j imprimir
+
+print_uno:
+la $a2, numero_uno
+j imprimir
+
+print_dos:
+la $a2, numero_dos
+j imprimir
+
+print_tres:
+la $a2, numero_tres
+j imprimir
+
+print_cuatro:
+la $a2, numero_cuatro
+j imprimir
+
+print_cinco:
+la $a2, numero_cinco
+j imprimir
+
+print_seis:
+la $a2, numero_seis
+j imprimir
+
+print_siete:
+la $a2, numero_siete
+j imprimir
+
+print_ocho:
+la $a2, numero_ocho
+j imprimir
+
+print_nueve:
+la $a2, numero_nueve
+j imprimir
+
+imprimir:
+lw $a3, 0($a2)
+sw $a3, 0($a0)
+lw $a3, 4($a2)
+sw $a3, 4($a0)
+lw $a3, 8($a2)
+sw $a3, 8($a0)
+
+lw $a3, 12($a2)
+sw $a3, 128($a0)
+lw $a3, 16($a2)
+sw $a3, 132($a0)
+lw $a3, 20($a2)
+sw $a3, 136($a0)
+
+lw $a3, 24($a2)
+sw $a3, 256($a0)
+lw $a3, 28($a2)
+sw $a3, 260($a0)
+lw $a3, 32($a2)
+sw $a3, 264($a0)
+
+lw $a3, 36($a2)
+sw $a3, 384($a0)
+lw $a3, 40($a2)
+sw $a3, 388($a0)
+lw $a3, 44($a2)
+sw $a3, 392($a0)
+
+lw $a3, 48($a2)
+sw $a3, 512($a0)
+lw $a3, 52($a2)
+sw $a3, 516($a0)
+lw $a3, 56($a2)
+sw $a3, 520($a0)
+
+beq $v0, 4, fin_imprimir
+
+mfhi $a1
+addi $v0, $zero, 4	#v0 = 4, es la segunda vez que se imprimirá y después deberá parar
+addi $a0, $s0, 68	#a0 contiene la dirección de la "matriz" del numero
+beq $a1, 0, print_cero
+beq $a1, 1, print_uno
+beq $a1, 2, print_dos
+beq $a1, 3, print_tres
+beq $a1, 4, print_cuatro
+beq $a1, 5, print_cinco
+beq $a1, 6, print_seis
+beq $a1, 7, print_siete
+beq $a1, 8, print_ocho
+beq $a1, 9, print_nueve
+
+
+fin_imprimir:
 
 teclado:
-addi $a0, $zero, 100	# cada 100 ms
-addi $v0, $zero, 32     # esperamos (syscall 32 sleep)
+addi $a0, $zero, 50	# 50ms
+addi $v0, $zero, 32     
 syscall	
 
 addi $t6, $zero, 0xffff0004		# los caracteres del teclado se guardan en la dir de mem 0xffff0004
@@ -71,7 +199,7 @@ addi $a0, $zero, 764
 addi $a1, $zero, 128
 addi $a2, $zero, 4220
 jal evaluar_siguiente
-beq $v1, 1, teclado
+beq $v1, 1, imprimir_contador
 
 jal borrar_cola
 addi $a0, $zero, 4	#lo que se suma en un movimiento normal
@@ -87,7 +215,7 @@ addi $a0, $zero, 640
 addi $a1, $zero, 128
 addi $a2, $zero, 4096
 jal evaluar_siguiente
-beq $v1, 1, teclado
+beq $v1, 1, imprimir_contador
 
 jal borrar_cola
 addi $a0, $zero, -4	#lo que se suma en un movimiento normal
@@ -103,7 +231,7 @@ addi $a0, $zero, 640
 addi $a1, $zero, 4
 addi $a2, $zero, 768
 jal evaluar_siguiente
-beq $v1, 1, teclado
+beq $v1, 1, imprimir_contador
 
 jal borrar_cola
 addi $a0, $zero, -128	#lo que se suma en un movimiento normal
@@ -119,7 +247,7 @@ addi $a0, $zero, 3968
 addi $a1, $zero, 4
 addi $a2, $zero, 4096
 jal evaluar_siguiente
-beq $v1, 1, teclado
+beq $v1, 1, imprimir_contador
 
 jal borrar_cola
 addi $a0, $zero, 128	#lo que se suma en un movimiento normal
@@ -326,8 +454,12 @@ beq $a2, 16767247, insertar_comida
 beq $a2,$s6, insertar_comida
 sw $s7 , 0($a0)
 
+
 fin_evaluar_siguiente:
 jr $ra
+
+
+
 
 
 
