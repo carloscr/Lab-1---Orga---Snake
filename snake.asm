@@ -1,17 +1,24 @@
 .data
 
 display: .word 0:262144
-snake: .word -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
-numero_cero: 3329330,3329330,3329330, 3329330,0,3329330, 3329330,0,3329330, 3329330,0,3329330, 3329330,3329330,3329330
-numero_uno: 0,3329330,3329330, 3329330,3329330,3329330, 0,3329330,3329330, 0,3329330,3329330, 0,3329330,3329330
-numero_dos: 3329330,3329330,3329330, 0,0,3329330, 3329330,3329330,3329330, 3329330,0,0, 3329330,3329330,3329330
-numero_tres: 3329330,3329330,3329330, 0,0,3329330, 0,3329330,3329330, 0,0,3329330, 3329330,3329330,3329330
-numero_cuatro: 3329330,0,3329330, 3329330,0,3329330, 3329330,3329330,3329330, 0,0,3329330, 0,0,3329330
-numero_cinco: 3329330,3329330,3329330, 3329330,0,0, 3329330,3329330,3329330, 0,0,3329330, 3329330,3329330,3329330
-numero_seis: 3329330,3329330,3329330, 3329330,0,0, 3329330,3329330,3329330, 3329330,0,3329330, 3329330,3329330,3329330
-numero_siete: 3329330,3329330,3329330, 0,0,3329330, 0,0,3329330, 0,0,3329330, 0,0,3329330
-numero_ocho: 3329330,3329330,3329330, 3329330,0,3329330, 3329330,3329330,3329330, 3329330,0,3329330, 3329330,3329330,3329330
-numero_nueve: 3329330,3329330,3329330, 3329330,0,3329330, 3329330,3329330,3329330, 0,0,3329330, 3329330,3329330,3329330
+snake: .word -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+		-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+		-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+		-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+		-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+		-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+		-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+		-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+numero_cero: 3329330,3329330,3329330, 3329330,13959168,3329330, 3329330,13959168,3329330, 3329330,13959168,3329330, 3329330,3329330,3329330
+numero_uno: 13959168,3329330,3329330, 3329330,3329330,3329330, 13959168,3329330,3329330, 13959168,3329330,3329330, 13959168,3329330,3329330
+numero_dos: 3329330,3329330,3329330, 13959168,13959168,3329330, 3329330,3329330,3329330, 3329330,13959168,13959168, 3329330,3329330,3329330
+numero_tres: 3329330,3329330,3329330, 13959168,13959168,3329330, 13959168,3329330,3329330, 13959168,13959168,3329330, 3329330,3329330,3329330
+numero_cuatro: 3329330,13959168,3329330, 3329330,13959168,3329330, 3329330,3329330,3329330, 13959168,13959168,3329330, 13959168,13959168,3329330
+numero_cinco: 3329330,3329330,3329330, 3329330,13959168,13959168, 3329330,3329330,3329330, 13959168,13959168,3329330, 3329330,3329330,3329330
+numero_seis: 3329330,3329330,3329330, 3329330,13959168,13959168, 3329330,3329330,3329330, 3329330,13959168,3329330, 3329330,3329330,3329330
+numero_siete: 3329330,3329330,3329330, 13959168,13959168,3329330, 13959168,13959168,3329330, 13959168,13959168,3329330, 13959168,13959168,3329330
+numero_ocho: 3329330,3329330,3329330, 3329330,13959168,3329330, 3329330,3329330,3329330, 3329330,13959168,3329330, 3329330,3329330,3329330
+numero_nueve: 3329330,3329330,3329330, 3329330,13959168,3329330, 3329330,3329330,3329330, 13959168,13959168,3329330, 3329330,3329330,3329330
 
 .text
 la $t0, display
@@ -22,25 +29,44 @@ la $s1, snake
 #contador
 addi $s4, $zero, 0
 
+#insertando obstaculos
+addi $s6, $zero, 0
+while_insertando_obstaculos:
+beq $s6, 5, fin_while_insertando_obstaculos	#el número que se compara es el número aproximado de obstaculos que habrán (para jugar bien, el número debería ser más o menos 10)
+jal insertar_obstaculo
+add $s6, $s6, $v1
+j while_insertando_obstaculos
+fin_while_insertando_obstaculos:
+
+#mostrar limite superior tablero
+addi $t2, $zero, 13959168	#color linea
+add $t3, $s0, $zero	#inicio linea borde
+addi $t4, $s0, 640 #inicio linea siguiente (inicio tablero)
+
+marcando_borde:
+sw $t2, 0($t3)
+addi $t3, $t3, 4
+beq $t3, $t4, fin_marcando_borde
+j marcando_borde
+fin_marcando_borde:
 
 #colores
 addi $t2, $zero, 0xffd90f	#color obstaculos
 addi $s6, $zero, 0x0064ff	#color snake
 addi $s7, $zero, 0xffffff	#color comida
 
-
 #muestra snake en la pantalla (posición inicial)
 sw $s6 , 1032($t0)
 sw $s6 , 1036($t0)
 sw $s6 , 1040($t0)
 
-sw $t2 , 1080($t0)
-sw $t2 , 2012($t0)
-sw $t2 , 3016($t0)
-sw $t2 , 1200($t0)
-sw $t2 , 1064($t0)
-sw $t2 , 2080($t0)
-sw $t2 , 3000($t0)
+#sw $t2 , 1080($t0)
+#sw $t2 , 2012($t0)
+#sw $t2 , 3016($t0)
+#sw $t2 , 1200($t0)
+#sw $t2 , 1064($t0)
+#sw $t2 , 2080($t0)
+#sw $t2 , 3000($t0)
 
 #muestra el primer alimento
 li $a1, 862
@@ -52,7 +78,6 @@ add $a0, $s0, $a0
 sw $s7 , 0($a0)
 
 
-
 #carga posición inicial de snake en el arreglo de posición
 addi $t3, $zero, 1032
 sw $t3, 0($t1)
@@ -62,6 +87,7 @@ addi $t3, $zero, 1040
 sw $t3, 8($t1)
 
 imprimir_contador:
+bgt $s4, 99, teclado
 addi $a0, $s0, 48	#a0 contiene la dirección de la "matriz" del primer numero
 addi $a1, $zero, 10 	#para dividir por 10
 div $s4, $a1
@@ -180,7 +206,7 @@ syscall
 addi $t6, $zero, 0xffff0004		# los caracteres del teclado se guardan en la dir de mem 0xffff0004
 lw $s3, 0($t6)
 
-
+#tecla_presionada:
 beq $s3, 100, mover_derecha #d
 
 beq $s3, 97, mover_izquierda #a
@@ -189,7 +215,7 @@ beq $s3, 119, mover_arriba #w
 
 beq $s3, 115, mover_abajo #s
 
-beq $s3, 113, salir #q
+#beq $s3, 113, salir #q
 
 j teclado
 
@@ -461,6 +487,62 @@ jr $ra
 
 
 
+insertar_obstaculo:
+li $a1, 862
+li $v0, 42
+syscall
+addi $a0, $a0, 161
+sll $a0, $a0, 2
+add $a0, $s0, $a0
 
+
+#primera columna
+addi $t2, $a0,-4	#segunda fila
+addi $t3, $t2, -128	#primera fila
+addi $t4, $t2, 128	#tercera fila
+
+lw $t5, 0($t2)
+lw $t6, 0($t3)
+lw $t7, 0($t4)
+
+bne $t5, 0, no_obstaculizar
+bne $t6, 0, no_obstaculizar
+bne $t7, 0, no_obstaculizar
+
+#segunda columna
+addi $t2, $t2,4	#segunda fila
+addi $t3, $t3,4	#primera fila
+addi $t4, $t4,4	#tercera fila
+
+lw $t5, 0($t2)
+lw $t6, 0($t3)
+lw $t7, 0($t4)
+
+bne $t5, 0, no_obstaculizar
+bne $t6, 0, no_obstaculizar
+bne $t7, 0, no_obstaculizar
+
+#tercera columna
+addi $t2, $t2,4	#segunda fila
+addi $t3, $t3,4	#primera fila
+addi $t4, $t4,4	#tercera fila
+
+lw $t5, 0($t2)
+lw $t6, 0($t3)
+lw $t7, 0($t4)
+
+bne $t5, 0, no_obstaculizar
+bne $t6, 0, no_obstaculizar
+bne $t7, 0, no_obstaculizar
+
+
+addi $t4, $zero, 16767247
+sw   $t4, 0($a0)
+addi $v1, $zero, 1
+jr $ra
+
+no_obstaculizar:
+addi $v1, $zero, 0
+jr $ra
 
 salir:
